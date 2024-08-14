@@ -9,19 +9,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputUrl = document.getElementById("inputUrl");
     const turndownService = new TurndownService();
 
-    fetchDataButton.addEventListener("click", () => {
-        const url = inputUrl.value;
+    // Function to fetch and render prompts from URL
+    function fetchAndRenderPrompts(url) {
         if (url) {
             fetch(url)
-                .then(response => {
+                .then((response) => {
                     if (!response.ok) {
                         throw new Error("Network response was not ok");
                     }
                     return response.json();
                 })
-                .then(data => {
+                .then((data) => {
                     promptList.innerHTML = ""; // Clear the existing list
-                    data.forEach(prompt => {
+                    data.forEach((prompt) => {
                         const li = document.createElement("li");
                         li.textContent = prompt.filename;
                         li.addEventListener("click", () => {
@@ -30,15 +30,31 @@ document.addEventListener("DOMContentLoaded", () => {
                         });
                         promptList.appendChild(li);
                     });
+                    // Update the URL parameter
+                    const urlParams = new URLSearchParams(
+                        window.location.search
+                    );
+                    urlParams.set("url", url);
+                    window.history.replaceState(
+                        {},
+                        "",
+                        `${window.location.pathname}?${urlParams}`
+                    );
                 })
-                .catch(error => {
+                .catch((error) => {
                     const errorMessage = document.createElement("div");
-                    errorMessage.textContent = "Failed to fetch data. Please check the URL and try again.";
+                    errorMessage.textContent =
+                        "Failed to fetch data. Please check the URL and try again.";
                     errorMessage.style.color = "red";
                     promptList.innerHTML = ""; // Clear the existing list
                     promptList.appendChild(errorMessage);
                 });
         }
+    }
+
+    fetchDataButton.addEventListener("click", () => {
+        const url = inputUrl.value;
+        fetchAndRenderPrompts(url);
     });
 
     inputA.addEventListener("input", () => {
@@ -94,5 +110,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const template = inputB.value;
         const input = inputA.value;
         outputC.value = template.replace("{}", input);
+    }
+
+    // Check for "prompt-url" and fetch prompts if available
+    const urlParams = new URLSearchParams(window.location.search);
+    const promptUrl = urlParams.get("url");
+
+    if (promptUrl) {
+        fetchAndRenderPrompts(promptUrl);
     }
 });
