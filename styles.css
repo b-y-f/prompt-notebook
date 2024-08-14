@@ -1,0 +1,88 @@
+/* styles.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.top {
+    display: flex;
+    width: 100%;
+    height: 67%;
+}
+
+.top textarea {
+    width: 40%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.top .newPromptArea {
+    position: relative;
+    width: 40%;
+    height: 100%;
+}
+
+.top .newPromptArea textarea {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.top .newPromptArea button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.top .promptListArea {
+    width: 20%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.top .promptListArea ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.top .promptListArea ul li {
+    cursor: pointer;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.top .promptListArea ul li:hover {
+    background-color: #f0f0f0;
+}
+
+.bottom {
+    width: 100%;
+    height: 33%;
+}
+
+.bottom textarea {
+    width: 100%;
+    height: 100%;
+    background-color: lightgrey;
+    box-sizing: border-box;
+}
+
+.success-message {
+    display: none;
+    color: greenyellow;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
