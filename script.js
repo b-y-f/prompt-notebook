@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const promptList = document.getElementById("promptList");
     const fetchDataButton = document.getElementById("fetch-data");
     const inputUrl = document.getElementById("inputUrl");
-    const turndownService = new TurndownService();
+    const turndownService = new TurndownService({
+        headingStyle:'atx'
+    });
 
     // Function to fetch and render prompts from URL
     function fetchAndRenderPrompts(url) {
