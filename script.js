@@ -73,13 +73,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     inputA.addEventListener("input", () => {
         cleanButton.style.display = inputA.value ? "block" : "none";
+        cutButton.style.display = inputA.value ? "block" : "none";
         updateOutput();
     });
 
     cleanButton.addEventListener("click", () => {
-        inputA.value = "";
-        cleanButton.style.display = "none";
-        updateOutput();
+        cleanInputA();
+    });
+
+    cutButton.addEventListener("click", () => {
+        navigator.clipboard
+            .writeText(inputA.value)
+            .then(() => {
+                cleanInputA();
+            })
+            .catch((err) => {
+                console.error("Failed to copy text: ", err);
+            });
     });
 
     inputB.addEventListener("input", updateOutput);
@@ -90,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const text = event.clipboardData.getData("text");
             inputA.value = turndownService.turndown(text);
             cleanButton.style.display = "block";
+            cutButton.style.display = "block";
             updateOutput();
         }
     });
