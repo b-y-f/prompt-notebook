@@ -7,9 +7,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const promptList = document.getElementById("promptList");
     const fetchDataButton = document.getElementById("fetch-data");
     const inputUrl = document.getElementById("inputUrl");
+    const cutButton = document.getElementById("cutBtn");
     const turndownService = new TurndownService({
-        headingStyle:'atx'
+        headingStyle: "atx",
+        codeBlockStyle: "fenced",
+        linkStyle: "referenced",
+        linkReferenceStyle: "shortcut",
+        preformattedCode: true,
     });
+
+    function cleanInputA() {
+        inputA.value = "";
+        cleanButton.style.display = "none";
+        cutButton.style.display = "none";
+        updateOutput();
+    }
 
     // Function to fetch and render prompts from URL
     function fetchAndRenderPrompts(url) {
