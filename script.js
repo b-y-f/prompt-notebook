@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         linkReferenceStyle: "shortcut",
         preformattedCode: true,
     });
+    TurndownPluginGfmService.gfm(turndownService)
 
     function cleanInputA() {
         inputA.value = "";
