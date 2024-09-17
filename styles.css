@@ -45,13 +45,13 @@ textarea {
 
 .top .newPromptArea button {
     position: absolute;
-    top: 10px;
+    bottom: 10px;
     right: 10px;
     width: 60px;
 }
 
 .top .newPromptArea button#cutBtn {
-    top: 50px;
+    bottom: 50px;
 }
 
 .top .promptListArea {
